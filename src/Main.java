@@ -1,15 +1,37 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+/**
+ * A binary gap within a positive integer N is any maximal sequence of consecutive zeros that is surrounded by ones at both ends
+ * in the binary representation of N.
+ */
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        /*
+            9 has binary rep of 1001
+            529 has binary rep of 1000010001
+            20 has binary rep of 10100
+            15 has binary rep of 1111
+            32 has binary rep of 100000
+         */
+        int[] numbers = {9, 529, 20, 15, 32};
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        for(int num : numbers) {
+            System.out.println("Number is " + num + " with max sequence of zeroes equals to " + binaryGap(num));
         }
+    }
+
+    private static int binaryGap (int number) {
+        String binaryString = Integer.toBinaryString(number);
+        int gap = 0;
+        int maxGap = 0;
+
+        for (int i = 0; i < binaryString.length(); i++) {
+            if(binaryString.charAt(i) == '1') {
+                maxGap = Math.max(maxGap, gap);
+                gap =0;
+            } else {
+                gap += 1;
+            }
+        }
+
+        return maxGap;
     }
 }
